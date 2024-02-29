@@ -1,0 +1,140 @@
+[
+  {
+    "_id": "ack5L5ivM5ACBeNpK",
+    "createdAt": {
+        "$date": "2021-05-25T16:33:11.240Z"
+    },
+    "services": {
+        "password": {
+            "bcrypt": "$2b$10$9gkiI4iV6f8eni85PnjVEulbQ3QaguOoj.RUA9XAPCN9qVIIPb1z6"
+        },
+        "email": {
+            "verificationTokens": [{
+                "token": "EbTjNlouMfIoa10m3X7LoCIy0izOkLMwod1YPQUPf1A",
+                "address": "ttt@iiaaaaaa.com",
+                "when": {
+                    "$date": "2021-05-25T16:33:11.245Z"
+                }
+            }]
+        },
+        "resume": {
+            "loginTokens": [{
+                "when": {
+                    "$date": "2023-12-19T16:19:46.426Z"
+                },
+                "hashedToken": "5kHgHAVDYUnKRue35GkrL3IPrWiPtkwQmm/3Vj5D6JM="
+            }, {
+                "when": {
+                    "$date": "2023-12-21T22:09:06.131Z"
+                },
+                "hashedToken": "3jp2uHTjmDkfA4rmJZhpSKB03rW7tBhoWkql1Cvpt2s="
+            }, {
+                "when": {
+                    "$date": "2024-02-05T08:40:13.307Z"
+                },
+                "hashedToken": "WqytPusLbqjtV4zS5nr2VhSV9ilPbgMbK5xwVXL2tNk="
+            }]
+        }
+    },
+    "emails": [{
+        "address": "ttt@iiaaaaaa.com",
+        "verified": false
+    }],
+    "profile": {
+        "firstname": "Steph",
+        "lastname": "Harry",
+        "reCaptchaResponse": "03AGdBq26nku4RK1uJ0weHUx8C3ojJ6CWdYExA68S4yyEKazC-9tZFPQVwdEfGJED5sQ3fUI8N-My0PIk6-FN95aem5vgEVka6IvKLL7fIh7HKaKqzDY4f5uVZJ145rwtsKH_1G54iWVXLQcsAb5qg0F1pY-IW1dkokUeDN_fo8plnOooMLsJHGCNT8f_sYYYej6EDP9w_3uKFyyiaTaPZj_Sfs724oKGiFpHd4R36JI8lylV91clI_RP1BPboePQDLCvE3xruDOP3Gbl9ZEa5Y42YnJSa5Cpdl-rG7gFdz8-sJlWrbhVnXPxTlqaZotnY2ICcjEibswkNzOwBqiq5dvHZLsPtvTLwtbja4zeuEbwX7q0y9b41eVqp9m5IbjO5PJUdFa96KynZ510Bn8t_YLv18G7cZ698ujvXODzO-S2MLQ3_R2N4JcM3fi5MskKBNZpbBo7eA2Vt"
+    },
+    "settings": {
+        "language": "fr",
+        "displayModals": {
+            "warningOffline": true
+        },
+        "visibleMarkersOnMap": [{
+            "id": 0,
+            "visible": true
+        }, {
+            "id": 1,
+            "visible": true
+        }, {
+            "id": 2,
+            "visible": true
+        }, {
+            "id": 3,
+            "visible": true
+        }, {
+            "id": 4,
+            "visible": true
+        }, {
+            "id": 5,
+            "visible": true
+        }, {
+            "id": 6,
+            "visible": true
+        }, {
+            "id": 7,
+            "visible": true
+        }],
+        "mapFilter": {
+            "activityFilterOnMap": true,
+            "distanceMax": 100,
+            "distanceMin": 0
+        },
+        "activitiesListFilter": {
+            "isMapVisible": true,
+            "isPhotosVisible": true,
+            "isDetailsVisible": true,
+            "distanceMax": 100,
+            "distanceMin": 0,
+            "activityTypeNotSelected": []
+        },
+        "activitiesAnimalsListFilter": {
+            "isMapVisible": true,
+            "isPhotosVisible": false,
+            "isDetailsVisible": true,
+            "distanceMax": 38,
+            "distanceMin": 0,
+            "activityTypeNotSelected": ["Cani-cross", "Cani-VTT", "Canoe - Kayak", "Canin - Education"]
+        },
+        "displayOnBoarding": false
+    },
+    "versions": [{
+        "createdAt": {
+            "$date": "2021-05-27T07:44:35.000Z"
+        },
+        "webVersion": "0.42.2",
+        "mobileVersion": "0.11.0",
+        "viewPortWidth": 424
+    }, {
+        "createdAt": {
+            "$date": "2021-05-27T07:49:51.000Z"
+        },
+        "webVersion": "0.42.2",
+        "mobileVersion": "0.11.0",
+        "viewPortWidth": 424
+    }, {
+        "createdAt": {
+            "$date": "2023-12-19T19:12:47.000Z"
+        },
+        "webVersion": "0.89.2",
+        "mobileVersion": "0.18.0",
+        "viewPortWidth": 412
+    }],
+    "status": {
+        "online": false,
+        "lastLogin": {
+            "date": {
+                "$date": "2024-02-05T08:40:13.361Z"
+            },
+            "ipAddr": "127.0.0.1",
+            "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/13.6.4 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36"
+        }
+    },
+    "fcmToken": {
+        "createdAt": {
+            "$date": "2023-12-19T19:13:01.000Z"
+        },
+        "token": "f2RC-nLWQBSuvwjgHPUWFf:APA91bGoJmfTTrNspV5w5g1DwyXNzcRmdTLFCdOIrjZWOjP0f1ZK7kFT3R7-5AQL95vnS8vFuEq6zKNuXX2qOpHDJ7rNo8Od7xXWsU1hVJDzYmbyBlpAvrFykX6_sbbZzbvzk5qGA7rc"
+    }
+}
+]

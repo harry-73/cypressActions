@@ -1,0 +1,13 @@
+node_modules/
+.VSCodeCounter/
+.meteor/local/
+.cache/
+.scannerwork/
+.coverage/
+.cypress-coverage
+.vite-inspect/
+.vscode/
+.nyc_output/
+settings-production.json
+settings-development.json
+mobile-config.js

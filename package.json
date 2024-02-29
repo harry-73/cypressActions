@@ -1,0 +1,65 @@
+{
+  "name": "cypressActions",
+  "private": true,
+  "scripts": {
+    "cy-gui": "COVERAGE=1 BABEL_ENV=test cypress open",
+    "test": "COVERAGE=1 COVERAGE_OUT_LCOVONLY=1 COVERAGE_APP_FOLDER=$PWD/ BABEL_ENV=test cypress run",
+    "start": "MONGO_URL='' BABEL_ENV=test DISABLE_REACT_FAST_REFRESH=1 meteor run  --exclude-archs 'web.browser.legacy, web.cordova'",
+    "test:dev:headless": "WAIT_ON_TIMEOUT=1800000 start-server-and-test http://127.0.0.1:3000",
+    "build": "meteor build ../output/vue --directory",
+    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+    "visualize": "meteor --production --extra-packages bundle-visualizer"
+  },
+  "nyc": {
+    "all": false,
+    "reporter": [
+      "lcovonly"
+    ],
+    "report-dir": ".tests/.cypress-coverage",
+    "instrument": true,
+    "sourceMap": true,
+    "include": [
+      "**/*.{js,vue}"
+    ],
+    "exclude": [
+      "**/node_modules/**",
+      "**/tests/**",
+      ".coverage/**",
+      "packages/**",
+      ".vite-inspect/**",
+      "*.js"
+    ],
+    "extension": [
+      ".js",
+      ".vue"
+    ]
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.23.5",
+    "cypress": "^13.6.6",
+    "meteor-node-stubs": "^1.2.7",
+    "meteor-vite": "^1.10.1",
+    "vue": "^3.3.9",
+    "vue-meteor-tracker": "^3.0.0-beta.7",
+    "vue-router": "^4.2.5"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.js",
+      "server": "server/main.js"
+    },
+    "testModule": "tests/main.js"
+  },
+  "devDependencies": {
+    "@cypress/code-coverage": "^3.12.26",
+    "@types/meteor": "^2.9.7",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "autoprefixer": "^10.4.16",
+    "mongo-seeding": "^4.0.0",
+    "nyc": "^15.1.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "vite": "^3.2.7",
+    "vite-plugin-istanbul": "^5.0.0"
+  }
+}

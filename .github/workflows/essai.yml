@@ -1,0 +1,84 @@
+name: ci:test
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  test:
+    name: Continuous integration (tests)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: 20.9.0
+          
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4.1.1
+
+      - name: Set $PATH 🪜
+        run: echo "$HOME/.meteor" >> $GITHUB_PATH
+      - name: essai
+        run: sudo apt-get install inotify-tools
+      - name: Watch
+        run:  bash "$HOME/work/VueGPX/VueGPX/watch.sh" &
+      - name: Set env.METEOR_RELEASE 📻
+        run: echo "METEOR_RELEASE=$(cat .meteor/release | cut -d@ -f2)" >> $GITHUB_ENV
+
+      - name: Cache ~/.meteor (Meteor ${{ env.METEOR_RELEASE }}) 💿
+        uses: actions/cache@v4.0.0
+        id: cache-meteor
+        env:
+          cache-name: cache-meteor
+        with:
+          path: ~/.meteor
+          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ env.METEOR_RELEASE }}-${{ hashFiles('.meteor/release') }}-${{ hashFiles('.meteor/versions') }}
+          restore-keys: |
+            ${{ runner.os }}-test-${{ env.cache-name }}-${{ env.METEOR_RELEASE }}-${{ hashFiles('.meteor/release') }}-
+            ${{ runner.os }}-test-${{ env.cache-name }}-${{ env.METEOR_RELEASE }}-
+      - name: Install Meteor ${{ env.METEOR_RELEASE }} ☄️
+        if: steps.cache-meteor.outputs.cache-hit != 'true'
+        run: curl https://install.meteor.com?release=${{ env.METEOR_RELEASE }} | sh
+
+      - name: Cache ~/.npm 📀
+        uses: actions/cache@v4.0.0
+        env:
+          cache-name: cache-npm
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-test-${{ env.cache-name }}-
+            ${{ runner.os }}-test-
+            ${{ runner.os }}-
+      - name: Cache ./node_modules 💽
+        uses: actions/cache@v4.0.0
+        id: cache-node-modules
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Cache Cypress binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Cypress
+        uses: cypress-io/github-action@v6
+        with:
+          record: true
+          start: meteor npm start
+          wait-on: 'http://127.0.0.1:3000'
+          wait-on-timeout: 600
+          command: meteor npm test
+      #    build: npx cypress info
+        env:
+          # pass the Cypress Cloud record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # pass the project ID from the secrets through environment variable
+          CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
