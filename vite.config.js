@@ -3,6 +3,9 @@ import vue from '@vitejs/plugin-vue'
 import istanbul from 'vite-plugin-istanbul';
 
 export default defineConfig({
+  server: {
+    host: true,
+  },
   plugins: [ istanbul({
       include: ['client/*', 'imports/*', 'server/*'],
       exclude: [
@@ -23,5 +26,8 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: ['vue-meteor-tracker'],
+    entries: ['./imports/ui/main.js'],
+    include: ['meteor-vite/client'],
+    force: true,
   },
 })
