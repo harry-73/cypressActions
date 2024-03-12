@@ -1,11 +1,6 @@
 import assert from 'assert';
 import { Meteor } from 'meteor/meteor';
 
-// Helps Vite with initial dependency optimization
-// This module is loaded at runtime, so we have to include it manually once
-// for it to be optimized prior to the first load of the application
-import 'meteor-vite/client';
-
 import './methods/traces';
 import './methods/markers';
 import './methods/activities';
