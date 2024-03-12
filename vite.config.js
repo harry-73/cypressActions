@@ -27,5 +27,6 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['vue-meteor-tracker'],
     entries: ['./imports/ui/main.js'],
+    include: ['meteor-vite/client'],
   },
 })
