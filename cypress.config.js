@@ -19,7 +19,6 @@ module.exports = defineConfig({
   // setupNodeEvents can be defined in either
   // the e2e or component configuration
 
-  defaultCommandTimeout: 60000,
   pageLoadTimeout: 120000,
   video: true,
   fixturesFolder: 'tests/cypress/fixtures',
