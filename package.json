@@ -38,7 +38,7 @@
     "@babel/runtime": "^7.23.5",
     "cypress": "^13.6.6",
     "meteor-node-stubs": "^1.2.7",
-    "meteor-vite": "^1.10.1",
+    "meteor-vite": "^1.10.2",
     "vue": "^3.3.9",
     "vue-meteor-tracker": "^3.0.0-beta.7",
     "vue-router": "^4.2.5"

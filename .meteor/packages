@@ -18,6 +18,6 @@ shell-server@0.6.0-beta300.6                   # Server-side component of the `m
 hot-module-replacement@0.5.4-beta300.6         # Update client in development without reloading the page
 
 static-html@1.3.3-beta300.6                    # Define static page content in .html files
-jorgenvatle:vite-bundler@2.0.0-beta.8
+jorgenvatle:vite-bundler@2.0.0-beta.11
 
 
