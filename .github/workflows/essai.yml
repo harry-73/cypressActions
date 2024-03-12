@@ -26,17 +26,29 @@ jobs:
 
       - name: Cache ~/.meteor (Meteor ${{ env.METEOR_RELEASE }}) 💿
         uses: actions/cache@v4.0.0
+        id: cache-meteor-tool
+        env:
+          cache-name: cache-meteor-tool
+        with:
+          path: ~/.meteor
+          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ env.METEOR_RELEASE }}
+          restore-keys: |
+            ${{ runner.os }}-test-${{ env.cache-name }}-
+            ${{ runner.os }}-test-
+            ${{ runner.os }}-
+        
+      - name: Cache Meteor packages
+        uses: actions/cache@v4.0.0
         id: cache-meteor
         env:
           cache-name: cache-meteor
         with:
-          path: |
-            ~/.meteor
-            ./.meteor
-          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ env.METEOR_RELEASE }}-${{ hashFiles('.meteor/release') }}-${{ hashFiles('.meteor/versions') }}
+          path: .meteor
+          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/versions') }}
           restore-keys: |
-            ${{ runner.os }}-test-${{ env.cache-name }}-${{ env.METEOR_RELEASE }}-${{ hashFiles('.meteor/release') }}-
-            ${{ runner.os }}-test-${{ env.cache-name }}-${{ env.METEOR_RELEASE }}-
+            ${{ runner.os }}-test-${{ env.cache-name }}-
+            ${{ runner.os }}-test-
+            ${{ runner.os }}-
 
       - name: Cache ~/.npm 📀
         uses: actions/cache@v4.0.0
@@ -65,16 +77,19 @@ jobs:
           path: ~/.cache/Cypress
           key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
 
+      - name: Install Meteor ${{ env.METEOR_RELEASE }} ☄️
+        if: steps.cache-meteor-tool.outputs.cache-hit != 'true'
+        run: | 
+          curl https://install.meteor.com?release=${{ env.METEOR_RELEASE }} | sh
+
       - name: Install npm dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
         
-      - name: Install Meteor ${{ env.METEOR_RELEASE }} ☄️
+      - name: Install Meteor packages
         if: steps.cache-meteor.outputs.cache-hit != 'true'
         run: | 
-          curl https://install.meteor.com?release=${{ env.METEOR_RELEASE }} | sh
-
-          # Forces Meteor to pull in packages, Meteor's install script enough unless I'm mistaken.
+          # Forces Meteor to pull in packages
           meteor lint
 
       - name: Cypress
@@ -83,7 +98,7 @@ jobs:
           record: true
           start: meteor npm start
           wait-on: 'http://localhost:3000, http://localhost:5173/imports/ui/main.js'
-          wait-on-timeout: 600
+          wait-on-timeout: 120
           command: meteor npm test
       #    build: npx cypress info
         env:
