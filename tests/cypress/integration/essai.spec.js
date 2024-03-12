@@ -6,7 +6,7 @@ describe("Map", () => {
 
 	it("Log the new user", () => {
 		cy.visit("http://localhost:3000/map/-1", {timeout: 600000});
-		cy.get('[href="/"]').click({ timeout: 60000 });
+		cy.get('[href="/"]').click();
 //		cy.get('.text-3xl').should("eq", 'Welcome to Meteor!');
 //		cy.get('.text-xl').should("eq", 'Learn Meteor!');
 		//cy.get("input#at-field-email").type("ste.monnier@gmail.com");
