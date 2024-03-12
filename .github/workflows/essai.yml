@@ -33,7 +33,9 @@ jobs:
         env:
           cache-name: cache-meteor
         with:
-          path: ~/.meteor
+          path: |
+            ~/.meteor
+            ./.meteor
           key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ env.METEOR_RELEASE }}-${{ hashFiles('.meteor/release') }}-${{ hashFiles('.meteor/versions') }}
           restore-keys: |
             ${{ runner.os }}-test-${{ env.cache-name }}-${{ env.METEOR_RELEASE }}-${{ hashFiles('.meteor/release') }}-
