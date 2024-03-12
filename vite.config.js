@@ -3,6 +3,9 @@ import vue from '@vitejs/plugin-vue'
 import istanbul from 'vite-plugin-istanbul';
 
 export default defineConfig({
+  server: {
+    host: true,
+  },
   plugins: [ istanbul({
       include: ['client/*', 'imports/*', 'server/*'],
       exclude: [
