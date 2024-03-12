@@ -82,7 +82,7 @@ jobs:
         with:
           record: true
           start: meteor npm start
-          wait-on: 'http://127.0.0.1:3000'
+          wait-on: 'http://localhost:3000, http://localhost:5171/imports/ui/main.js'
           wait-on-timeout: 600
           command: meteor npm test
       #    build: npx cypress info
