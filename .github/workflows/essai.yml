@@ -38,13 +38,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-test-${{ env.cache-name }}-${{ env.METEOR_RELEASE }}-${{ hashFiles('.meteor/release') }}-
             ${{ runner.os }}-test-${{ env.cache-name }}-${{ env.METEOR_RELEASE }}-
-      - name: Install Meteor ${{ env.METEOR_RELEASE }} ☄️
-        if: steps.cache-meteor.outputs.cache-hit != 'true'
-        run: | 
-          curl https://install.meteor.com?release=${{ env.METEOR_RELEASE }} | sh
-
-          # Forces Meteor to pull in packages, Meteor's install script enough unless I'm mistaken.
-          meteor lint
 
       - name: Cache ~/.npm 📀
         uses: actions/cache@v4.0.0
@@ -57,6 +50,7 @@ jobs:
             ${{ runner.os }}-test-${{ env.cache-name }}-
             ${{ runner.os }}-test-
             ${{ runner.os }}-
+
       - name: Cache ./node_modules 💽
         uses: actions/cache@v4.0.0
         id: cache-node-modules
@@ -71,6 +65,18 @@ jobs:
         with:
           path: ~/.cache/Cypress
           key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install npm dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+        
+      - name: Install Meteor ${{ env.METEOR_RELEASE }} ☄️
+        if: steps.cache-meteor.outputs.cache-hit != 'true'
+        run: | 
+          curl https://install.meteor.com?release=${{ env.METEOR_RELEASE }} | sh
+
+          # Forces Meteor to pull in packages, Meteor's install script enough unless I'm mistaken.
+          meteor lint
 
       - name: Cypress
         uses: cypress-io/github-action@v6
